@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
+import { ThemeProvider } from "next-themes";
 
 export const metadata = {
   title: "Create T3 App",
@@ -8,14 +9,28 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
+function TopNav() {
+  return (
+    <div className="flex items-center justify-between w-full text-xl font-semibold border-b h-16 p-4 bg-gray-800">
+      <div>Gallery</div>
+        <div>Sign In</div>
+    </div>  
+  )
+}
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${GeistSans.variable} flex flex-col gap-4`}>
+      <body>
+        <ThemeProvider attribute="class" themes={["dark"]}>
+          <TopNav/>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
