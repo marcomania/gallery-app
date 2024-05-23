@@ -21,6 +21,9 @@
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
       # "vscodevim.vim"
+      "bradlc.vscode-tailwindcss"
+      "dsznajder.es7-react-js-snippets"
+      "vivaxy.vscode-conventional-commits"
     ];
     # Enable previews
     previews = {
