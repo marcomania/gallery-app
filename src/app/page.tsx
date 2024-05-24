@@ -10,12 +10,12 @@ async function Images() {
   return (
     <div className="flex flex-wrap gap-4 p-2">
       {images.map((image) => (
-        <div key={image.id} className="flex flex-col">
+        <div key={image.id} className="flex flex-col" style={{ height: "480px" }}>
           <Image
             src={image.url}
-            alt={`Image ${image.id}`}
-            width={400}
-            height={270}
+            alt={image.name}
+            width={480}
+            height={480}
           />
           <div className="text-center">{image.name}</div>
         </div>
