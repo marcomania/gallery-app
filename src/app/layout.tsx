@@ -5,6 +5,9 @@ import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import TopNav from "./_components/TopNav";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
 
 export const metadata = {
   title: "T3 Gallery App",
@@ -13,17 +16,26 @@ export const metadata = {
 };
 
 export default function RootLayout({
+  modal,
   children,
 }: {  
+  modal: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${GeistSans.variable} flex flex-col gap-4`}>
+      <html lang="en" className={`${GeistSans.variable}`}>
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}/>
         <body>
-          <ThemeProvider attribute="class" themes={["dark"]}>
-            <TopNav/>
-            {children}
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            <div className="h-screen grid grid-rows-[auto,1fr]">
+              <TopNav/>
+              <main className="overflow-y-scroll" >
+                {children}
+              </main>
+            </div>
+            {modal}
+            <div id="modal-root" />
           </ThemeProvider>
         </body>
       </html>
