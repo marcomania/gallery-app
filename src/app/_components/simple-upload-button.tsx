@@ -48,6 +48,10 @@ const SimpleUploadButton = () => {
       posthog.capture("upload-begin");
       toast.loading(`Uploading ${fileName}`, {id: "upload-button"});
     },
+    onUploadError(error) {
+      posthog.capture("upload-error", { error });
+      toast.error('Upload failed', {id: "upload-button"});
+    },
     onClientUploadComplete() { 
       router.refresh() 
       toast.success('Upload complete', {id: "upload-button"});
